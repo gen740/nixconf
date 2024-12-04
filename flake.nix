@@ -11,21 +11,21 @@
     {
       self,
       nix-darwin,
-      nixpkgs,
       home-manager,
+      ...
     }:
     let
       nix-darwin-config =
         { pkgs, ... }:
+        with pkgs;
         {
           environment.systemPackages = [
-            pkgs.coreutils
-            pkgs.curl
-            pkgs.wget
+            coreutils
+            curl
+            wget
           ];
-          fonts.packages = [ pkgs.fira-code-nerdfont ];
+          fonts.packages = [ nerd-fonts.fira-code ];
           services.nix-daemon.enable = true;
-          programs.zsh.enable = true;
           homebrew = {
             enable = true;
             casks = [
@@ -40,13 +40,12 @@
             caskArgs.appdir = "/Applications/Homebrew Apps";
           };
           nix = {
-            # /run/current-system/sw/bin/nix
-            package = pkgs.nix;
+            package = nix; # /run/current-system/sw/bin/nix
             settings = {
               experimental-features = "nix-command flakes";
               extra-platforms = "aarch64-darwin";
             };
-            nixPath = pkgs.lib.mkForce [
+            nixPath = lib.mkForce [
               {
                 darwin-config = builtins.concatStringsSep ":" [
                   "$HOME/.nixpkgs/darwin-configuration.nix"
