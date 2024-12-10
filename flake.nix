@@ -41,7 +41,7 @@
         }
       );
       home-manager-config =
-        { pkgs, ... }:
+        { pkgs, config, ... }:
         let
           user_home = "/Users/gen";
           user_name = "gen";
@@ -53,9 +53,10 @@
           };
           home-manager.users.gen = (
             import ./home.nix {
-              pkgs = pkgs;
               name = user_name;
               home = user_home;
+              inherit config;
+              inherit pkgs;
             }
           );
         };
