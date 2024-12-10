@@ -27,10 +27,6 @@
           fzf
     }
 
-    function zshaddhistory() {
-      return 1
-    }
-
     stty stop undef # do not stop the terminal with C-s
 
     bindkey -e
@@ -57,8 +53,7 @@
   enable = true;
   history = {
     save = 0;
-    size = 0;
+    size = 100;
   };
   enableCompletion = true;
-  syntaxHighlighting.enable = true;
 }
