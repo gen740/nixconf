@@ -15,15 +15,10 @@
       ...
     }:
     let
-      nix-darwin-config =
+      nix-darwin-config = (
         { pkgs, ... }:
         with pkgs;
         {
-          environment.systemPackages = [
-            coreutils
-            curl
-            wget
-          ];
           fonts.packages = [ nerd-fonts.fira-code ];
           services.nix-daemon.enable = true;
           homebrew = {
@@ -39,41 +34,28 @@
             ];
             caskArgs.appdir = "/Applications/Homebrew Apps";
           };
-          nix = {
-            package = nix; # /run/current-system/sw/bin/nix
-            settings = {
-              experimental-features = "nix-command flakes";
-              extra-platforms = "aarch64-darwin";
-            };
-            nixPath = lib.mkForce [
-              {
-                darwin-config = builtins.concatStringsSep ":" [
-                  "$HOME/.nixpkgs/darwin-configuration.nix"
-                  "$HOME/.nix-defexpr/channels"
-                ];
-              }
-            ];
-          };
+          nix.settings.experimental-features = "nix-command flakes";
           system.stateVersion = 5;
           nixpkgs.hostPlatform = "aarch64-darwin";
           nixpkgs.config.allowUnfree = true;
-        };
+        }
+      );
       home-manager-config =
-        let
-          home = "/Users/gen";
-          name = "gen";
-        in
         { pkgs, ... }:
+        let
+          user_home = "/Users/gen";
+          user_name = "gen";
+        in
         {
           users.users.gen = {
-            name = name;
-            home = home;
+            name = user_name;
+            home = user_home;
           };
           home-manager.users.gen = (
             import ./home.nix {
               pkgs = pkgs;
-              name = name;
-              home = home;
+              name = user_name;
+              home = user_home;
             }
           );
         };
