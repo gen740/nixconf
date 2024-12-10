@@ -2,13 +2,6 @@
   enable = true;
   userName = "gen740";
   userEmail = "54583542+gen740@users.noreply.github.com";
-  ignores = [
-    ".direnv"
-    ".envrc"
-    "flake.nix"
-    "flake.lock"
-    "workdir"
-  ];
   aliases = {
     subup = "submodule update --init --recursive";
     pl = "log --graph --oneline --decorate --all --date=short --pretty='format:%C(bold magenta)%h%C(reset) - %C(green)%ad%C(reset)%C(auto)%d%C(reset) %C(ul brightmagenta)%s%C(reset) %C(yellow)@%an%C(reset)'";
