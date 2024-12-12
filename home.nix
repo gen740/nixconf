@@ -190,13 +190,9 @@
         TIMEFMT = "%*E %*U %*S CPU: %P Memory: %M KB # %J";
         EDITOR = "nvim";
         GIT_EDITOR = "nvim";
-        # LANG = "en_US.UTF-8";
-        # LC_ALL = "en_US.UTF-8";
         LESSCHARSET = "utf-8";
-        # MANWIDTH = 100;
         VISUAL = "nvim";
         MANPAGER = "nvim +Man!";
-        PAGER = "nvim -R";
         XDG_CONFIG_HOME = "$HOME/.config";
         XDG_CACHE_HOME = "$HOME/.cache";
         XDG_DATA_HOME = "$HOME/.local/share";
