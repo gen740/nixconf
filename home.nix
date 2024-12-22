@@ -210,7 +210,6 @@
       plugins =
         (with pkgs.vimPlugins; [
           oil-nvim
-          nvim-web-devicons
 
           nvim-cmp
           cmp-nvim-lsp
