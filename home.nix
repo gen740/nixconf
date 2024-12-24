@@ -183,6 +183,7 @@
       enable = true;
       initExtra = ''
         stty stop undef # do not stop the terminal with C-s
+        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
         PROMPT="%~ > ";
       '';
       sessionVariables = {
