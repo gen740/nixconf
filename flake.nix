@@ -29,8 +29,6 @@
               "xquartz"
               "discord"
               "skim"
-              "iterm2"
-              "wezterm"
             ];
             caskArgs.appdir = "/Applications/Homebrew Apps";
           };

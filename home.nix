@@ -143,6 +143,7 @@
         subup = "submodule update --init --recursive";
         pl = "log --graph --oneline --decorate --all --date=short --pretty='format:%C(bold magenta)%h%C(reset) - %C(green)%ad%C(reset)%C(auto)%d%C(reset) %C(ul brightmagenta)%s%C(reset) %C(yellow)@%an%C(reset)'";
         ps = "status --short --branch --show-stash  --untracked-files=all";
+        cla = "clean -xfd -e flake.nix -e flake.lock -e .envrc";
       };
       signing = {
         gpgPath = "gpg";
@@ -178,13 +179,12 @@
         };
       };
     };
-
     zsh = {
       enable = true;
       initExtra = ''
         stty stop undef # do not stop the terminal with C-s
         zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-        PROMPT="%~ > ";
+        PROMPT="%~> ";
       '';
       sessionVariables = {
         REPORTTIME = 10;
