@@ -1,14 +1,8 @@
+{ config, pkgs, ... }:
 {
-  pkgs,
-  name,
-  home,
-  config,
-  ...
-}:
-{
-  home.username = name;
-  home.homeDirectory = home;
-  home.stateVersion = "25.05";
+  home.username = "gen";
+  home.homeDirectory = "/Users/gen";
+  home.stateVersion = "24.11";
   home.shellAliases = {
     ls = "ls --color -F";
     dr = "direnv allow";
