@@ -26,7 +26,7 @@
     wget
     curl
     hyperfine
-
+    fswatch
     btop
     fd
     ripgrep
@@ -36,6 +36,7 @@
     nixd
     nixfmt-rfc-style
     nodejs
+    rsync
   ];
   programs = {
     home-manager.enable = true;
@@ -231,7 +232,7 @@
 
           vim-vsnip
           nvim-lspconfig
-          tokyonight-nvim
+          nightfox-nvim
           copilot-lua
         ])
         ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [

@@ -1,29 +1,79 @@
-# Colors (Tokyo Night)
-# Source https//github.com/zatchheems/tokyo-night-alacritty-theme
+# Nightfox Alacritty Colors
+## name: nightfox
+## upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nightfox/alacritty.toml
 
-# Default colors
 [colors.primary]
-background = '#1a1b26'
-foreground = '#a9b1d6'
+background = "#192330"
+foreground = "#cdcecf"
+dim_foreground = "#aeafb0"
+bright_foreground = "#d6d6d7"
 
-# Normal colors
+[colors.cursor]
+text = "#cdcecf"
+cursor = "#aeafb0"
+
+[colors.vi_mode_cursor]
+text = "#cdcecf"
+cursor = "#63cdcf"
+
+[colors.search.matches]
+foreground = "#cdcecf"
+background = "#3c5372"
+
+[colors.search.focused_match]
+foreground = "#cdcecf"
+background = "#81b29a"
+
+[colors.footer_bar]
+foreground = "#cdcecf"
+background = "#29394f"
+
+[colors.hints.start]
+foreground = "#cdcecf"
+background = "#f4a261"
+
+[colors.hints.end]
+foreground = "#cdcecf"
+background = "#29394f"
+
+[colors.selection]
+text = "#cdcecf"
+background = "#2b3b51"
+
 [colors.normal]
-black = '#32344a'
-red = '#f7768e'
-green = '#9ece6a'
-yellow = '#e0af68'
-blue = '#7aa2f7'
-magenta = '#ad8ee6'
-cyan = '#449dab'
-white = '#787c99'
+black = "#393b44"
+red = "#c94f6d"
+green = "#81b29a"
+yellow = "#dbc074"
+blue = "#719cd6"
+magenta = "#9d79d6"
+cyan = "#63cdcf"
+white = "#dfdfe0"
 
-# Bright colors
 [colors.bright]
-black = '#444b6a'
-red = '#ff7a93'
-green = '#b9f27c'
-yellow = '#ff9e64'
-blue = '#7da6ff'
-magenta = '#bb9af7'
-cyan = '#0db9d7'
-white = '#acb0d0'
+black = "#575860"
+red = "#d16983"
+green = "#8ebaa4"
+yellow = "#e0c989"
+blue = "#86abdc"
+magenta = "#baa1e2"
+cyan = "#7ad5d6"
+white = "#e4e4e5"
+
+[colors.dim]
+black = "#30323a"
+red = "#ab435d"
+green = "#6e9783"
+yellow = "#baa363"
+blue = "#6085b6"
+magenta = "#8567b6"
+cyan = "#54aeb0"
+white = "#bebebe"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#f4a261"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#d67ad2"
