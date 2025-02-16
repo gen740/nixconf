@@ -8,19 +8,43 @@
     dr = "direnv allow";
     ta = "tmux attach";
   };
-  home.packages = with pkgs; [
-    wget
-    curl
-    fswatch
-    glab
-    trash-cli
-    nixd
-    nixfmt-rfc-style
-    rsync
-  ];
+
+  nixpkgs.config.allowUnfree = true;
+
+  home.packages =
+    let
+      macos_applications = with pkgs; [
+        skimpdf
+        notion-app
+        slack
+        raycast
+        zoom-us
+        google-chrome
+        chatgpt
+      ];
+    in
+    with pkgs;
+    [
+      wget
+      curl
+      fswatch
+      glab
+      trash-cli
+      nixd
+      nixfmt-rfc-style
+      rsync
+    ]
+    ++ pkgs.lib.optionals stdenv.isDarwin macos_applications;
 
   xdg.configFile."git/git-commitmessage.txt" = {
     source = ./git/git-commitmessage.txt;
+  };
+
+  nix = {
+    package = pkgs.nix;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
 
   programs = {
