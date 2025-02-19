@@ -33,6 +33,7 @@
       nixd
       nixfmt-rfc-style
       rsync
+      gh
     ]
     ++ pkgs.lib.optionals stdenv.isDarwin macos_applications;
 
@@ -50,7 +51,6 @@
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
-    gh.enable = true;
     ripgrep.enable = true;
     btop.enable = true;
 
