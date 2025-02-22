@@ -119,6 +119,7 @@
         set -g status-right "#[bold]%H:%M %m-%d"
         set -g pane-border-style fg=brightblack
         set -g pane-active-border-style fg=blue
+        set -g default-terminal "xterm-256color"
         set-window-option -g mode-keys vi
         bind -T copy-mode-vi v send -X begin-selection
         bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel pbcopy
@@ -139,6 +140,7 @@
         pl = "log --graph --oneline --decorate --all --date=short --pretty='format:%C(bold magenta)%h%C(reset) - %C(green)%ad%C(reset)%C(auto)%d%C(reset) %C(ul brightmagenta)%s%C(reset) %C(yellow)@%an%C(reset)'";
         ps = "status --short --branch --show-stash  --untracked-files=all";
         cla = "clean -xfd -e flake.nix -e flake.lock -e .envrc";
+        difftool-master = "!git difftool $(git merge-base origin/master HEAD)..HEAD";
       };
       signing = {
         gpgPath = "gpg";
