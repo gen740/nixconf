@@ -21,6 +21,7 @@
         zoom-us
         google-chrome
         chatgpt
+        discord
       ];
     in
     with pkgs;
@@ -122,6 +123,7 @@
         set -g default-terminal "xterm-256color"
         set-window-option -g mode-keys vi
         bind -T copy-mode-vi v send -X begin-selection
+        bind c new-window -c ~/home
         bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel pbcopy
         bind-key k select-pane -U
         bind-key j select-pane -D
@@ -143,7 +145,7 @@
         difftool-master = "!git difftool $(git merge-base origin/master HEAD)..HEAD";
       };
       signing = {
-        gpgPath = "gpg";
+        signer = "gpg";
         key = "gen740 <54583542+gen740@users.noreply.github.com>";
         signByDefault = true;
       };
@@ -212,22 +214,23 @@
           cmp-nvim-lsp-signature-help
           cmp-path
           cmp-vsnip
+          vim-vsnip
+
+          nvim-lspconfig
+
+          copilot-lua
 
           nvim-dap
           nvim-nio
           nvim-dap-ui
 
-          plenary-nvim
-          telescope-nvim
-          telescope-fzf-native-nvim
-          fzf-lua
+          # plenary-nvim
+          # telescope-nvim
+          # telescope-fzf-native-nvim
 
           nvim-treesitter
 
-          vim-vsnip
-          nvim-lspconfig
           nightfox-nvim
-          copilot-lua
         ])
         ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
           asm
@@ -248,6 +251,7 @@
           rust
           toml
           typescript
+          vhdl
           vim
           vimdoc
           yaml
