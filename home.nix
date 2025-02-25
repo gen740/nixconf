@@ -208,29 +208,11 @@
       plugins =
         (with pkgs.vimPlugins; [
           oil-nvim
-
-          nvim-cmp
-          cmp-nvim-lsp
-          cmp-nvim-lsp-signature-help
-          cmp-path
-          cmp-vsnip
-          vim-vsnip
-
+          blink-cmp
           nvim-lspconfig
-
           copilot-lua
-
-          nvim-dap
-          nvim-nio
-          nvim-dap-ui
-
-          # plenary-nvim
-          # telescope-nvim
-          # telescope-fzf-native-nvim
-
-          nvim-treesitter
-
           nightfox-nvim
+          nvim-treesitter
         ])
         ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
           asm
