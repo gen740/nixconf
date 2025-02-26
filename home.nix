@@ -237,6 +237,7 @@
           vim
           vimdoc
           yaml
+          doxygen
         ]);
       viAlias = true;
       withNodeJs = true;
