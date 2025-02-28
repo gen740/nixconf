@@ -211,8 +211,8 @@
           blink-cmp
           nvim-lspconfig
           copilot-lua
-          nightfox-nvim
           nvim-treesitter
+          onedark-nvim
         ])
         ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
           asm
