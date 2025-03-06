@@ -93,7 +93,6 @@
         "--prompt=\ "
         "--pointer=\ "
       ];
-      tmux.enableShellIntegration = true;
     };
 
     lazygit = {
@@ -171,6 +170,13 @@
           template = "~/.config/git/git-commitmessage.txt";
         };
       };
+      ignores = [
+        ".direnv"
+        ".envrc"
+        "flake.nix"
+        "flake.lock"
+        "workdir/"
+      ];
     };
 
     zsh = {
@@ -212,7 +218,7 @@
           nvim-lspconfig
           copilot-lua
           nvim-treesitter
-          onedark-nvim
+          github-nvim-theme
         ])
         ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
           asm
