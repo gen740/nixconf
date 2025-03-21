@@ -22,6 +22,7 @@
         google-chrome
         chatgpt
         discord
+        keycastr
       ];
     in
     with pkgs;
@@ -184,6 +185,21 @@
       initExtra = ''
         stty stop undef
       ''; # do not stop the terminal with C-s
+      envExtra = ''
+        ##
+        ## Prevent to load system provided configuration files:
+        ##  - /etc/zprofile
+        ##  - /etc/zshrc
+        ##  - /etc/zlogin
+        ##  - /etc/zlogout
+        ##
+        unsetopt global_rcs
+        # Nix
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+          source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        fi
+        # End Nix
+      '';
       defaultKeymap = "emacs";
       localVariables = {
         PROMPT = "%~ ";
@@ -244,6 +260,7 @@
           vimdoc
           yaml
           doxygen
+          typst
         ]);
       viAlias = true;
       withNodeJs = true;
