@@ -1,15 +1,11 @@
 { pkgs, ... }:
 {
-  home.username = "gen";
-  home.homeDirectory = "/Users/gen";
   home.stateVersion = "24.11";
   home.shellAliases = {
     ls = "ls --color -F";
     dr = "direnv allow";
     ta = "tmux attach";
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   home.packages =
     let
