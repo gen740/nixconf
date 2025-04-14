@@ -16,9 +16,9 @@
         raycast
         zoom-us
         google-chrome
-        chatgpt
         discord
         keycastr
+        utm
       ];
     in
     with pkgs;
@@ -31,6 +31,7 @@
       nixd
       nixfmt-rfc-style
       rsync
+      zstd
       gh
     ]
     ++ pkgs.lib.optionals stdenv.isDarwin macos_applications;

@@ -25,15 +25,9 @@
         "x86_64-linux"
       ];
 
-      perSystem =
-        { pkgs, ... }:
-        {
-          # 開発環境の設定などをここに書けます
-        };
-
       flake = {
         homeConfigurations = {
-          gen = home-manager.lib.homeManagerConfiguration {
+          gen-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               system = "aarch64-darwin"; # 対象の system を明示
               config.allowUnfree = true;
@@ -43,6 +37,32 @@
               {
                 home.username = "gen";
                 home.homeDirectory = "/Users/gen";
+              }
+            ];
+          };
+          gen-aarch64-linux = home-manager.lib.homeManagerConfiguration {
+            pkgs = import nixpkgs {
+              system = "aarch64-linux"; # 対象の system を明示
+              config.allowUnfree = true;
+            };
+            modules = [
+              ./home/gen/home.nix
+              {
+                home.username = "gen";
+                home.homeDirectory = "/home/gen";
+              }
+            ];
+          };
+          gen-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+            pkgs = import nixpkgs {
+              system = "x86_64-linux"; # 対象の system を明示
+              config.allowUnfree = true;
+            };
+            modules = [
+              ./home/gen/home.nix
+              {
+                home.username = "gen";
+                home.homeDirectory = "/home/gen";
               }
             ];
           };
