@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvim-conf = {
+      url = "github:gen740/config.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,13 +19,13 @@
       flake-parts,
       nixpkgs,
       home-manager,
+      nvim-conf,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "aarch64-darwin"
         "aarch64-linux"
-        "x86_64-darwin"
         "x86_64-linux"
       ];
 
@@ -37,6 +41,7 @@
               {
                 home.username = "gen";
                 home.homeDirectory = "/Users/gen";
+                home.file.".config/nvim".source = nvim-conf;
               }
             ];
           };
@@ -50,6 +55,7 @@
               {
                 home.username = "gen";
                 home.homeDirectory = "/home/gen";
+                home.file.".config/nvim".source = nvim-conf;
               }
             ];
           };
@@ -63,6 +69,7 @@
               {
                 home.username = "gen";
                 home.homeDirectory = "/home/gen";
+                home.file.".config/nvim".source = nvim-conf;
               }
             ];
           };
