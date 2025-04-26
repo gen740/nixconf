@@ -51,10 +51,10 @@
         };
 
         nixosConfigurations = {
-          "nixos" = nixpkgs.lib.nixosSystem {
+          "nixos-t2mac" = nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             modules = [
-              /etc/nixos/configuration.nix
+              ./hardwares/T2mac/configuration.nix
               ./nixos/configuration.nix
               home-manager.nixosModules.home-manager
               ./home/gen/home.nix
@@ -89,6 +89,15 @@
                   exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#nixos-orbstack
                 '').outPath
                 + "/bin/switch-orbstack-configuration";
+            };
+
+            switchT2MacConfiguration = {
+              type = "app";
+              program =
+                (pkgs.writeShellScriptBin "switch-t2mac-configuration" ''
+                  exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#nixos-t2mac
+                '').outPath
+                + "/bin/switch-t2mac-configuration";
             };
 
             switchDarwinConfiguration = {
