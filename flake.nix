@@ -12,8 +12,8 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-conf = {
-      url = "github:gen740/config.nvim";
+    my-nvim-conf = {
+      url = "github:gen740/my-nvim-conf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -24,7 +24,6 @@
       nixpkgs,
       home-manager,
       nix-darwin,
-      nvim-conf,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -36,28 +35,16 @@
 
       flake = {
         darwinConfigurations = {
-          "gen740noMacBook-Pro" = nix-darwin.lib.darwinSystem {
+          "gen740" = nix-darwin.lib.darwinSystem {
             system = "aarch64-darwin";
             modules = [
               {
-                nixpkgs.config.allowUnfree = true;
-              }
-              ./nix-darwin/configuration.nix
-              home-manager.darwinModules.home-manager
-              {
                 users.users.gen.home = "/Users/gen";
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.gen = ./home/gen/home.nix;
-                };
               }
-              {
-                home-manager.users.gen = ./home/macos_common.nix;
-              }
-              {
-                home-manager.users.gen.home.file.".config/nvim".source = nvim-conf;
-              }
+              home-manager.darwinModules.home-manager
+              ./home/gen/home.nix
+              ./home/gen/macosApps.nix
+              ./nix-darwin/configuration.nix
             ];
             specialArgs = { inherit inputs; };
           };
@@ -67,22 +54,10 @@
           "nixos" = nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             modules = [
-              {
-                nixpkgs.config.allowUnfree = true;
-              }
               /etc/nixos/configuration.nix
               ./nixos/configuration.nix
               home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.gen = ./home/gen/home.nix;
-                };
-              }
-              {
-                home-manager.users.gen.home.file.".config/nvim".source = nvim-conf;
-              }
+              ./home/gen/home.nix
             ];
           };
 
@@ -91,17 +66,8 @@
             modules = [
               ./nixos/configuration.nix
               ./hardwares/orbstack/configuration.nix
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.gen = ./home/gen/home.nix;
-                };
-              }
+              ./home/gen/home.nix
               home-manager.nixosModules.home-manager
-              {
-                home-manager.users.gen.home.file.".config/nvim".source = nvim-conf;
-              }
             ];
           };
         };
@@ -131,7 +97,7 @@
                 (pkgs.writeShellScriptBin "switch-darwin-configuration" ''
                   exec sudo ${
                     inputs.nix-darwin.packages.${system}.darwin-rebuild
-                  }/bin/darwin-rebuild switch --flake .#gen740noMacBook-Pro
+                  }/bin/darwin-rebuild switch --flake .#gen740
                 '').outPath
                 + "/bin/switch-darwin-configuration";
             };
