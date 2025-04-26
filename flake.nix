@@ -16,6 +16,9 @@
       url = "github:gen740/my-nvim-conf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+    };
   };
 
   outputs =
@@ -24,6 +27,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      nixos-hardware,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -54,11 +58,14 @@
           "nixos-t2mac" = nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             modules = [
+              nixos-hardware.nixosModules.apple-t2
+
               ./hardwares/T2mac/configuration.nix
               ./nixos/configuration.nix
               home-manager.nixosModules.home-manager
               ./home/gen/home.nix
             ];
+            specialArgs = { inherit inputs; };
           };
 
           "nixos-orbstack" = nixpkgs.lib.nixosSystem {
@@ -69,6 +76,7 @@
               ./home/gen/home.nix
               home-manager.nixosModules.home-manager
             ];
+            specialArgs = { inherit inputs; };
           };
         };
 
