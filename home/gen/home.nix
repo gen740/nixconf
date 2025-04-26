@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.stateVersion = "24.11";
   home.shellAliases = {
@@ -7,41 +7,25 @@
     ta = "tmux attach";
   };
 
-  home.packages =
-    let
-      macos_applications = with pkgs; [
-        skimpdf
-        notion-app
-        slack
-        raycast
-        zoom-us
-        google-chrome
-        discord
-        keycastr
-        utm
-      ];
-    in
-    with pkgs;
-    [
-      wget
-      curl
-      fswatch
-      glab
-      trash-cli
-      nixd
-      nixfmt-rfc-style
-      rsync
-      zstd
-      gh
-    ]
-    ++ pkgs.lib.optionals stdenv.isDarwin macos_applications;
+  home.packages = with pkgs; [
+    wget
+    curl
+    fswatch
+    glab
+    trash-cli
+    nixd
+    nixfmt-rfc-style
+    rsync
+    zstd
+    gh
+    gh-copilot
+  ];
 
   xdg.configFile."git/git-commitmessage.txt" = {
     source = ./git/git-commitmessage.txt;
   };
 
   nix = {
-    package = pkgs.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -179,7 +163,7 @@
 
     zsh = {
       enable = true;
-      initExtra = ''
+      initContent = ''
         stty stop undef
       ''; # do not stop the terminal with C-s
       envExtra = ''
