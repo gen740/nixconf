@@ -51,7 +51,7 @@
               ./home/gen/macosApps.nix
               ./nix-darwin/configuration.nix
               {
-                home-manager.users.gen.home.shellAlias = {
+                home-manager.users.gen.home.shellAliases = {
                   switch-conf = "sudo nix flake run github:gen740/my-nix-conf#switchDarwinConfiguration";
                 };
               }
@@ -71,7 +71,7 @@
               home-manager.nixosModules.home-manager
               ./home/gen/home.nix
               {
-                home-manager.users.gen.home.shellAlias = {
+                home-manager.users.gen.home.shellAliases = {
                   switch-conf = "sudo nix run github:gen740/my-nix-conf#switchT2MacConfiguration";
                 };
               }
@@ -87,7 +87,7 @@
               ./home/gen/home.nix
               home-manager.nixosModules.home-manager
               {
-                home-manager.users.gen.home.shellAlias = {
+                home-manager.users.gen.home.shellAliases = {
                   switch-conf = "sudo nix run github:gen740/my-nix-conf#switchOrbstackConfiguration";
                 };
               }
