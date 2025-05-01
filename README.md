@@ -1,4 +1,4 @@
-# home-manager configuration
+# NixOS/nix-darwin and home-manager configuration with my dotfiles
 
 ```bash
 nix run github:gen740/my-nix-conf#switchOrbstackConfiguration
