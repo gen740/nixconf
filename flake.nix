@@ -52,7 +52,6 @@
                 };
               }
             ];
-            specialArgs = { inherit inputs; };
           };
         };
 
@@ -73,7 +72,6 @@
                 };
               }
             ];
-            specialArgs = { inherit inputs; };
           };
 
           "nixos-orbstack" = nixpkgs.lib.nixosSystem {
@@ -91,7 +89,6 @@
                 };
               }
             ];
-            specialArgs = { inherit inputs; };
           };
         };
 
