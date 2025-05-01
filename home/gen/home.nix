@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 {
   nixpkgs.config.allowUnfree = true;
   home-manager = {
@@ -17,7 +17,7 @@
           ta = "tmux attach";
         };
 
-        home.file.".config/nvim".source = inputs.my-nvim-conf;
+        home.file.".config/nvim".source = ../../nvim;
 
         home.packages = with pkgs; [
           wget

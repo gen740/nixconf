@@ -12,10 +12,6 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    my-nvim-conf = {
-      url = "github:gen740/my-nvim-conf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
