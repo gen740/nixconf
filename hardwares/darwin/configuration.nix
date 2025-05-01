@@ -14,4 +14,5 @@
       };
     };
   };
+  users.users.gen.home = "/Users/gen";
 }

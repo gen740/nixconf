@@ -39,9 +39,6 @@
           "gen740" = nix-darwin.lib.darwinSystem {
             system = "aarch64-darwin";
             modules = [
-              {
-                users.users.gen.home = "/Users/gen";
-              }
               home-manager.darwinModules.home-manager
               ./home/gen/home.nix
               ./home/gen/macosApps.nix
@@ -64,9 +61,7 @@
             system = "aarch64-linux";
             modules = [
               nixos-hardware.nixosModules.apple-t2
-
               ./hardwares/T2mac/configuration.nix
-              ./nixos/configuration.nix
               home-manager.nixosModules.home-manager
               ./home/gen/home.nix
               {
@@ -84,10 +79,9 @@
           "nixos-orbstack" = nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             modules = [
-              ./nixos/configuration.nix
               ./hardwares/orbstack/configuration.nix
-              ./home/gen/home.nix
               home-manager.nixosModules.home-manager
+              ./home/gen/home.nix
               {
                 home-manager.users.gen.home.shellAliases = {
                   switch-conf = ''
