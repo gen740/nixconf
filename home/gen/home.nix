@@ -257,6 +257,7 @@
               ]);
             viAlias = true;
             withNodeJs = true;
+            vimdiffAlias = true;
           };
         };
       };
