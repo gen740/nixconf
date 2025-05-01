@@ -17,8 +17,6 @@
           ta = "tmux attach";
         };
 
-        home.file.".config/nvim".source = ../../nvim;
-
         home.packages = with pkgs; [
           wget
           curl
@@ -33,8 +31,13 @@
           gh-copilot
         ];
 
-        xdg.configFile."git/git-commitmessage.txt" = {
-          source = ./git/git-commitmessage.txt;
+        xdg.configFile = {
+          "git/git-commitmessage.txt" = {
+            source = ./git/git-commitmessage.txt;
+          };
+          "nvim" = {
+            source = ../../nvim;
+          };
         };
 
         nix = {
@@ -44,26 +47,10 @@
         };
 
         programs = {
-          home-manager.enable = true;
           gpg.enable = true;
           ripgrep.enable = true;
-          btop.enable = true;
 
-          alacritty = {
-            enable = true;
-            settings = {
-              general.import = [
-                ./alacritty/theme.toml
-                ./alacritty/keybindings.toml
-              ];
-              font.size = 16;
-              font.normal.family = "Cica";
-              window = {
-                decorations = "none";
-                option_as_alt = "Both";
-              };
-            };
-          };
+          alacritty = ./alacritty/setting.nix;
 
           fd = {
             enable = true;
