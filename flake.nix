@@ -23,6 +23,7 @@
 
   outputs =
     inputs@{
+      self,
       flake-parts,
       nixpkgs,
       home-manager,
@@ -49,6 +50,11 @@
               ./home/gen/home.nix
               ./home/gen/macosApps.nix
               ./nix-darwin/configuration.nix
+              {
+                home-manager.users.gen.home.shellAlias = {
+                  switch-conf = "sudo nix flake run github:gen740/my-nix-conf#switchDarwinConfiguration";
+                };
+              }
             ];
             specialArgs = { inherit inputs; };
           };
@@ -64,6 +70,11 @@
               ./nixos/configuration.nix
               home-manager.nixosModules.home-manager
               ./home/gen/home.nix
+              {
+                home-manager.users.gen.home.shellAlias = {
+                  switch-conf = "sudo nix run github:gen740/my-nix-conf#switchT2MacConfiguration";
+                };
+              }
             ];
             specialArgs = { inherit inputs; };
           };
@@ -75,6 +86,11 @@
               ./hardwares/orbstack/configuration.nix
               ./home/gen/home.nix
               home-manager.nixosModules.home-manager
+              {
+                home-manager.users.gen.home.shellAlias = {
+                  switch-conf = "sudo nix run github:gen740/my-nix-conf#switchOrbstackConfiguration";
+                };
+              }
             ];
             specialArgs = { inherit inputs; };
           };
@@ -94,7 +110,7 @@
               type = "app";
               program =
                 (pkgs.writeShellScriptBin "switch-orbstack-configuration" ''
-                  exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#nixos-orbstack
+                  exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake ${self.outPath}#nixos-orbstack
                 '').outPath
                 + "/bin/switch-orbstack-configuration";
             };
@@ -103,7 +119,7 @@
               type = "app";
               program =
                 (pkgs.writeShellScriptBin "switch-t2mac-configuration" ''
-                  exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake .#nixos-t2mac
+                  exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake ${self.outPath}#nixos-t2mac
                 '').outPath
                 + "/bin/switch-t2mac-configuration";
             };
@@ -112,9 +128,9 @@
               type = "app";
               program =
                 (pkgs.writeShellScriptBin "switch-darwin-configuration" ''
-                  exec sudo ${
+                  exec ${
                     inputs.nix-darwin.packages.${system}.darwin-rebuild
-                  }/bin/darwin-rebuild switch --flake .#gen740
+                  }/bin/darwin-rebuild switch --flake ${self.outPath}#gen740
                 '').outPath
                 + "/bin/switch-darwin-configuration";
             };
