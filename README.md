@@ -1,5 +1,9 @@
 # home-manager configuration
 
 ```bash
-git clone https://github.com/gen740/nixconf ~/.config/home-manager
+nix run github:gen740/my-nix-conf#switchOrbstackConfiguration
+# or
+nix run github:gen740/my-nix-conf#switchT2MacConfiguration
+# or
+nix run github:gen740/my-nix-conf#switchDarwinConfiguration
 ```
