@@ -70,6 +70,60 @@
     };
 
     gnome.gnome-remote-desktop.enable = true;
+
+    samba = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        global = {
+          "workgroup" = "WORKGROUP";
+          "server string" = "smbnix";
+          "netbios name" = "smbnix";
+          "security" = "user";
+          "guest account" = "nobody";
+          "map to guest" = "bad user";
+        };
+        "TM" = {
+          "path" = "/mnt/Shares/TM";
+          "valid users" = "gen";
+          "public" = "no";
+          "writeable" = "yes";
+          "force user" = "gen";
+          "fruit:aapl" = "yes";
+          "fruit:time machine" = "yes";
+          "ea support" = "yes";
+          "create mask" = "0664";
+          "directory mask" = "0775";
+          "vfs objects" = "fruit catia streams_xattr";
+        };
+        "Public" = {
+          "path" = "/mnt/Shares/Public";
+          "browseable" = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "gen";
+          "force group" = "wheel";
+        };
+      };
+    };
+    samba-wsdd = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    nfs.server = {
+      enable = true;
+      lockdPort = 4001;
+      mountdPort = 4002;
+      statdPort = 4000;
+      exports = ''
+        /export         0.0.0.0/0(rw,fsid=0,no_subtree_check,no_root_squash) localhost(rw,fsid=0,no_subtree_check)
+        /export/TM      0.0.0.0/0(rw,nohide,insecure,no_subtree_check,no_root_squash) localhost(rw,nohide,insecure,no_subtree_check)
+        /export/Public  0.0.0.0/0(rw,nohide,insecure,no_subtree_check,no_root_squash) localhost(rw,nohide,insecure,no_subtree_check)
+      '';
+    };
   };
 
   fileSystems = {
