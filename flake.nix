@@ -45,7 +45,7 @@
               home-manager.darwinModules.home-manager
               ./home/gen/home.nix
               ./home/gen/macosApps.nix
-              ./nix-darwin/configuration.nix
+              ./hardwares/darwin/configuration.nix
               {
                 home-manager.users.gen.home.shellAliases = {
                   switch-conf = ''

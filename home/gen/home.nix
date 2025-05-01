@@ -36,7 +36,7 @@
             source = ./git/git-commitmessage.txt;
           };
           "nvim" = {
-            source = ../../nvim;
+            source = ./nvim;
           };
         };
 
