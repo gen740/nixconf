@@ -23,6 +23,17 @@
           nixfmt-rfc-style
           rsync
           zstd
+
+          vscode-langservers-extracted
+          typescript-language-server
+          ruff
+          pyright
+          gopls
+          yaml-language-server
+          docker-language-server
+          lua-language-server
+          biome
+          llvmPackages.clang-tools
         ];
 
         xdg.configFile = {
