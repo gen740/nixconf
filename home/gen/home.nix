@@ -18,17 +18,11 @@
         };
 
         home.packages = with pkgs; [
-          wget
-          curl
           trash-cli
           nixd
           nixfmt-rfc-style
           rsync
           zstd
-
-          glab
-          gh
-          gh-copilot
         ];
 
         xdg.configFile = {
@@ -49,6 +43,19 @@
         programs = {
           gpg.enable = true;
           ripgrep.enable = true;
+          gh = {
+            enable = true;
+            extensions = with pkgs; [
+              gh-copilot
+              gh-notify
+              gh-dash
+            ];
+            settings = {
+              git_protocol = "ssh";
+              editor = "nvim";
+              prompt = "enabled";
+            };
+          };
 
           alacritty = import ./alacritty;
 

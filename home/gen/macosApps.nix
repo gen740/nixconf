@@ -6,10 +6,11 @@
         skimpdf
         notion-app
         raycast
-        discord
         keycastr
         utm
         jetbrains.clion
+        jetbrains.pycharm-professional
+        jetbrains.dataspell
       ];
     };
 }
