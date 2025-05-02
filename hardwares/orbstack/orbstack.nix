@@ -29,9 +29,6 @@
     noipv6
   '';
 
-  # Disable sshd
-  services.openssh.enable = false;
-
   # systemd
   systemd.services."systemd-oomd".serviceConfig.WatchdogSec = 0;
   systemd.services."systemd-userdbd".serviceConfig.WatchdogSec = 0;
