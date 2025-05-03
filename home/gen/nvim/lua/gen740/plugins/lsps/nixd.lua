@@ -4,10 +4,10 @@ require('lspconfig')['nixd'].setup {
   settings = {
     nixd = {
       nixpkgs = {
-        expr = 'import <nixpkgs> { }',
+        expr = 'let flake = builtins.getFlake ("git+file://" + toString ./); in flake.inputs.nixpkgs.legacyPackages.${builtins.currentSystem}'
       },
       formatting = {
-        command = { 'nixpkgs-fmt' },
+        command = { 'nixfmt' },
       },
       options = {
         nixos = {

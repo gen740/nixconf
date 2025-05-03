@@ -34,6 +34,7 @@
           lua-language-server
           biome
           llvmPackages.clang-tools
+          cachix
         ];
 
         xdg.configFile = {
