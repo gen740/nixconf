@@ -17,7 +17,6 @@
     set -g default-terminal "xterm-256color"
     set-window-option -g mode-keys vi
     bind -T copy-mode-vi v send -X begin-selection
-    bind c new-window -c ~/home
     bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel pbcopy
     bind-key k select-pane -U
     bind-key j select-pane -D
