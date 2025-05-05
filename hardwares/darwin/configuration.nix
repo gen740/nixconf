@@ -26,9 +26,15 @@ in
   };
   users.users.gen.home = "/Users/gen";
 
+  networking.hostName = "gen740.local";
+
   nix = {
     linux-builder.enable = true;
   };
+
+  fonts.packages = with pkgs; [
+    fira-code-nerdfont
+  ];
 
   environment = {
     systemPackages = with pkgs; [

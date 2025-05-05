@@ -5,8 +5,8 @@
       ./theme.toml
       ./keybindings.toml
     ];
-    font.size = 16;
-    font.normal.family = "Cica";
+    font.size = 14;
+    font.normal.family = "FiraCode Nerd Font Mono";
     window = {
       decorations = "none";
       option_as_alt = "Both";
