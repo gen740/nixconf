@@ -11,7 +11,6 @@
         jetbrains.clion
         jetbrains.pycharm-professional
         jetbrains.dataspell
-        xquartz
       ];
     };
 }
