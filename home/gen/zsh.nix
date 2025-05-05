@@ -4,21 +4,21 @@
     stty stop undef # do not stop the terminal with C-s
     case "$(uname)" in
       Darwin)
-        OS_ICON=" "  # macOS
+        HM_OS_ICON=""
         ;;
       Linux)
         if [[ -f /etc/os-release ]] && grep -q '^ID=nixos' /etc/os-release; then
-          OS_ICON=" "  # NixOS
+          HM_OS_ICON=""
         else
-          OS_ICON=" "  # その他の Linux
+          HM_OS_ICON=""
         fi
         ;;
       *)
-        OS_ICON=" "  # その他
+        HM_OS_ICON="?"
         ;;
     esac
     if whence __git_ps1 &>/dev/null; then
-      precmd () { __git_ps1 "$OS_ICON %~ " "" "(%s) " }
+      precmd () { __git_ps1 "$HM_OS_ICON (%m) %~ " "" "(%s) " }
     fi
   '';
   envExtra = ''

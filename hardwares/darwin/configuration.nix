@@ -30,6 +30,10 @@ in
     linux-builder.enable = true;
   };
 
+  fonts.packages = with pkgs; [
+    fira-code-nerdfont
+  ];
+
   environment = {
     systemPackages = with pkgs; [
       xquartz
