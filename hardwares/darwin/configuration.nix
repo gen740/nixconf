@@ -26,6 +26,8 @@ in
   };
   users.users.gen.home = "/Users/gen";
 
+  networking.hostName = "gen740.local";
+
   nix = {
     linux-builder.enable = true;
   };

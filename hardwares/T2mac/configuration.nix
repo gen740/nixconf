@@ -167,6 +167,9 @@
     };
   };
 
+  networking.hostName = "nixos";
+  networking.domain = "local";
+
   networking.firewall = {
     enable = false;
     # allowedTCPPorts = [
