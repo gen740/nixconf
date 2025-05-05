@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   pkgs,
+  inputs,
   ...
 }:
 
@@ -29,9 +30,7 @@
       "wheel"
       "networkmanager"
     ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHJnpnSTNU/qew1h6AUDsmJESPbDG3jFJPFlEW/3KwS gen@gen740.local"
-    ];
+    openssh.authorizedKeys.keys = inputs.secrets.secrets.openssh.authorizedKeys.keys;
   };
 
   hardware.firmware = [
@@ -73,12 +72,12 @@
 
     gitlab = {
       enable = true;
-      databasePasswordFile = pkgs.writeText "dbPassword" "zgvcyfwsxzcwr85l";
-      initialRootPasswordFile = pkgs.writeText "rootPassword" "dakqdvp4ovhksxer";
+      databasePasswordFile = pkgs.writeText "dbPassword" inputs.secrets.secrets.services.gitlab.databasePasswordFile;
+      initialRootPasswordFile = pkgs.writeText "rootPassword" inputs.secrets.secrets.services.gitlab.initialRootPassword;
       secrets = {
-        secretFile = pkgs.writeText "secret" "Aig5zaic";
-        otpFile = pkgs.writeText "otpsecret" "Riew9mue";
-        dbFile = pkgs.writeText "dbsecret" "we2quaeZ";
+        secretFile = pkgs.writeText "secret" inputs.secrets.secrets.services.gitlab.secrets.secret;
+        otpFile = pkgs.writeText "otpsecret" inputs.secrets.secrets.services.gitlab.secrets.otpsecret;
+        dbFile = pkgs.writeText "dbsecret" inputs.secrets.secrets.services.gitlab.secrets.dbsecret;
         jwsFile = pkgs.runCommand "oidcKeyBase" { } "${pkgs.openssl}/bin/openssl genrsa 2048 > $out";
       };
     };

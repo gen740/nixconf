@@ -15,6 +15,9 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
+    secrets = {
+      url = "path:/etc/secrets";
+    };
   };
 
   outputs =
@@ -52,6 +55,9 @@
                 };
               }
             ];
+            specialArgs = {
+              inputs = inputs;
+            };
           };
         };
 
@@ -72,6 +78,9 @@
                 };
               }
             ];
+            specialArgs = {
+              inputs = inputs;
+            };
           };
 
           "nixos-orbstack" = nixpkgs.lib.nixosSystem {
@@ -89,6 +98,9 @@
                 };
               }
             ];
+            specialArgs = {
+              inputs = inputs;
+            };
           };
         };
 
@@ -101,36 +113,64 @@
           ...
         }:
         {
-          apps = {
-            switchOrbstackConfiguration = {
-              type = "app";
-              program =
-                (pkgs.writeShellScriptBin "switch-orbstack-configuration" ''
-                  exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch -v -L --show-trace --flake ${self.outPath}#nixos-orbstack
-                '').outPath
-                + "/bin/switch-orbstack-configuration";
-            };
+          apps =
+            let
+              createSecretsIfNotExistsScript = ''
+                  if [ ! -f /etc/secrets/flake.nix ]; then
+                    echo "I will create /etc/secrets/flake.nix [y/N]"
+                    read answer
+                    case "$answer" in
+                      [yY]|[yY][eE][sS])
+                        echo "Creating /etc/secrets/flake.nix from template..."
+                        sudo mkdir -p /etc/secrets
+                        sudo sh -c 'cat > /etc/secrets/flake.nix <<EOF
+                ${builtins.readFile ./secrets_template.nix}
+                EOF'
+                        sudo chmod 644 /etc/secrets/flake.nix
+                        ;;
+                      *)
+                        echo "Skipped creation of /etc/secrets/flake.nix"
+                        ;;
+                    esac
+                  else
+                    echo "/etc/secrets/flake.nix already exists"
+                  fi
+              '';
+            in
+            {
+              switchOrbstackConfiguration = {
+                type = "app";
+                program =
+                  (pkgs.writeShellScriptBin "switch-orbstack-configuration" ''
+                    ${createSecretsIfNotExistsScript}
+                    exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch -v -L --show-trace --flake ${self.outPath}#nixos-orbstack
+                  '').outPath
+                  + "/bin/switch-orbstack-configuration";
+              };
 
-            switchT2MacConfiguration = {
-              type = "app";
-              program =
-                (pkgs.writeShellScriptBin "switch-t2mac-configuration" ''
-                  exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch -v -L --show-trace --flake ${self.outPath}#nixos-t2mac
-                '').outPath
-                + "/bin/switch-t2mac-configuration";
-            };
+              switchT2MacConfiguration = {
+                type = "app";
+                program =
+                  (pkgs.writeShellScriptBin "switch-t2mac-configuration" ''
+                    ${createSecretsIfNotExistsScript}
+                    exec sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch -v -L --show-trace --flake ${self.outPath}#nixos-t2mac
+                  '').outPath
+                  + "/bin/switch-t2mac-configuration";
+              };
 
-            switchDarwinConfiguration = {
-              type = "app";
-              program =
-                (pkgs.writeShellScriptBin "switch-darwin-configuration" ''
-                  exec ${
-                    inputs.nix-darwin.packages.${system}.darwin-rebuild
-                  }/bin/darwin-rebuild switch -v -L --show-trace --flake ${self.outPath}#gen740
-                '').outPath
-                + "/bin/switch-darwin-configuration";
+              switchDarwinConfiguration = {
+                type = "app";
+                program =
+                  (pkgs.writeShellScriptBin "switch-darwin-configuration" ''
+
+                    ${createSecretsIfNotExistsScript}
+                    exec ${
+                      inputs.nix-darwin.packages.${system}.darwin-rebuild
+                    }/bin/darwin-rebuild switch -v -L --show-trace --flake ${self.outPath}#gen740
+                  '').outPath
+                  + "/bin/switch-darwin-configuration";
+              };
             };
-          };
         };
     };
 }
