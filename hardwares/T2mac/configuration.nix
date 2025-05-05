@@ -44,7 +44,16 @@
     }))
   ];
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "54583542+gen740@users.noreply.github.com";
+  };
+
   services = {
+    nix-serve = {
+      enable = true;
+      openFirewall = true;
+    };
     openssh = {
       enable = true;
       ports = [ 22 ];
@@ -72,6 +81,8 @@
 
     gitlab = {
       enable = true;
+      port = 443;
+      https = true;
       databasePasswordFile = pkgs.writeText "dbPassword" inputs.secrets.secrets.services.gitlab.databasePasswordFile;
       initialRootPasswordFile = pkgs.writeText "rootPassword" inputs.secrets.secrets.services.gitlab.initialRootPassword;
       secrets = {
@@ -87,6 +98,9 @@
       recommendedProxySettings = true;
       virtualHosts = {
         localhost = {
+          forceSSL = true;
+          sslCertificate = "/var/lib/acme/localhost/fullchain.pem"; # または自己署名証明書へのパス
+          sslCertificateKey = "/var/lib/acme/localhost/key.pem";
           locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
         };
       };
@@ -166,30 +180,32 @@
     };
   };
 
-  networking.hostName = "nixos";
+  networking.hostName = "gen740-nixos";
   networking.domain = "local";
 
   networking.firewall = {
-    enable = false;
-    # allowedTCPPorts = [
-    #   2049
-    #   111
-    #   443
-    #   4000
-    #   4001
-    #   4002
-    #   20048
-    # ];
-    # allowedUDPPorts = [
-    #   2049
-    #   111
-    #   443
-    #   4000
-    #   4001
-    #   4002
-    #   20048
-    # ];
-    # allowPing = true;
+    enable = true;
+    allowedTCPPorts = [
+      2049
+      111
+      443
+      4000
+      4001
+      4002
+      5000
+      20048
+    ];
+    allowedUDPPorts = [
+      2049
+      111
+      443
+      4000
+      4001
+      4002
+      5000
+      20048
+    ];
+    allowPing = true;
   };
 
   systemd.targets.sleep.enable = false;
