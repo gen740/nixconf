@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   enable = true;
   initContent = ''
@@ -42,11 +43,16 @@
   plugins = [
     {
       name = "git-prompt";
-      src = builtins.fetchurl {
-        url = "https://github.com/git/git/raw/683c54c999c301c2cd6f715c411407c413b1d84e/contrib/completion/git-prompt.sh";
-        sha256 = "0fllfidrc9nj2b9mllf190y3bca1pdm95vyzgsza1l3gl3s1ixvz";
-      };
-      file = "";
+      src = pkgs.runCommand "git-prompt" { } ''
+        mkdir -p $out
+        cp ${
+          builtins.fetchurl {
+            url = "https://github.com/git/git/raw/683c54c999c301c2cd6f715c411407c413b1d84e/contrib/completion/git-prompt.sh";
+            sha256 = "0fllfidrc9nj2b9mllf190y3bca1pdm95vyzgsza1l3gl3s1ixvz";
+          }
+        } $out/git-prompt.sh
+      '';
+      file = "git-prompt.sh";
     }
   ];
   localVariables = {

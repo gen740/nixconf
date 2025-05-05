@@ -23,6 +23,7 @@
           nixfmt-rfc-style
           rsync
           zstd
+          wget
 
           vscode-langservers-extracted
           typescript-language-server
@@ -115,7 +116,9 @@
             inherit pkgs;
           };
           git = import ./git;
-          zsh = import ./zsh.nix;
+          zsh = import ./zsh.nix {
+            inherit pkgs;
+          };
           neovim = import ./nvim {
             inherit pkgs;
           };
