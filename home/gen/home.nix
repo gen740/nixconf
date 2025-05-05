@@ -52,6 +52,13 @@
           '';
         };
 
+        services = {
+          gpg-agent = {
+            enable = true;
+            pinentryPackage = pkgs.pinentry;
+          };
+        };
+
         programs = {
           gpg.enable = true;
           ripgrep.enable = true;
