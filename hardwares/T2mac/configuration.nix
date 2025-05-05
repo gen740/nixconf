@@ -71,6 +71,28 @@
 
     gnome.gnome-remote-desktop.enable = true;
 
+    gitlab = {
+      enable = true;
+      databasePasswordFile = pkgs.writeText "dbPassword" "zgvcyfwsxzcwr85l";
+      initialRootPasswordFile = pkgs.writeText "rootPassword" "dakqdvp4ovhksxer";
+      secrets = {
+        secretFile = pkgs.writeText "secret" "Aig5zaic";
+        otpFile = pkgs.writeText "otpsecret" "Riew9mue";
+        dbFile = pkgs.writeText "dbsecret" "we2quaeZ";
+        jwsFile = pkgs.runCommand "oidcKeyBase" { } "${pkgs.openssl}/bin/openssl genrsa 2048 > $out";
+      };
+    };
+
+    nginx = {
+      enable = true;
+      recommendedProxySettings = true;
+      virtualHosts = {
+        localhost = {
+          locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+        };
+      };
+    };
+
     samba = {
       enable = true;
       openFirewall = true;
@@ -146,30 +168,33 @@
   };
 
   networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      2049
-      111
-      4000
-      4001
-      4002
-      20048
-    ];
-    allowedUDPPorts = [
-      2049
-      111
-      4000
-      4001
-      4002
-      20048
-    ];
-    allowPing = true;
+    enable = false;
+    # allowedTCPPorts = [
+    #   2049
+    #   111
+    #   443
+    #   4000
+    #   4001
+    #   4002
+    #   20048
+    # ];
+    # allowedUDPPorts = [
+    #   2049
+    #   111
+    #   443
+    #   4000
+    #   4001
+    #   4002
+    #   20048
+    # ];
+    # allowPing = true;
   };
 
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
+  systemd.services.gitlab-backup.environment.BACKUP = "dump";
 
   programs.zsh.enable = true;
   programs.git.enable = true;
