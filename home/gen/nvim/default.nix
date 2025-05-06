@@ -2,12 +2,12 @@
 {
   enable = true;
   plugins =
-    (with pkgs.vimPlugins; [
+    with pkgs.vimPlugins;
+    [
       oil-nvim
       copilot-lua
-      nvim-treesitter
       github-nvim-theme
-    ])
+    ]
     ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
       asm
       c
@@ -33,7 +33,8 @@
       yaml
       doxygen
       typst
-    ]);
+    ])
+    ++ pkgs.vimPlugins.nvim-treesitter.allGrammars;
   viAlias = true;
   withNodeJs = true;
   vimdiffAlias = true;
