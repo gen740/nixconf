@@ -26,14 +26,14 @@ in
   };
   users.users.gen.home = "/Users/gen";
 
-  networking.hostName = "gen740.local";
+  networking.hostName = "gen740";
 
   nix = {
     linux-builder.enable = true;
   };
 
   fonts.packages = with pkgs; [
-    fira-code-nerdfont
+    nerd-fonts.fira-code
   ];
 
   environment = {

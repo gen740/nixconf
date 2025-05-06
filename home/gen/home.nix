@@ -33,6 +33,7 @@
           yaml-language-server
           docker-language-server
           lua-language-server
+          stylua
           biome
           llvmPackages.clang-tools
           cachix

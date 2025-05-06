@@ -8,6 +8,8 @@ vim.opt.wrap = false
 vim.opt.signcolumn = 'yes'
 vim.opt.list = true
 vim.opt.listchars = { tab = '»─', trail = '␣', extends = '»', precedes = '«', nbsp = '%' }
+vim.opt.pumheight = 15
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 vim.api.nvim_create_autocmd('TermOpen', {
   pattern = '*',

@@ -4,8 +4,6 @@
   plugins =
     (with pkgs.vimPlugins; [
       oil-nvim
-      blink-cmp
-      nvim-lspconfig
       copilot-lua
       nvim-treesitter
       github-nvim-theme
