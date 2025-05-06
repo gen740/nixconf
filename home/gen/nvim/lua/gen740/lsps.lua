@@ -1,3 +1,11 @@
+require('copilot').setup {
+  suggestion = {
+    enabled = true,
+    auto_trigger = true,
+    debounce = 75,
+  },
+}
+
 local on_attach = function(client, bufnr)
   local chars = {}
   for i = 32, 126 do

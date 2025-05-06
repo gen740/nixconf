@@ -4,7 +4,6 @@
   enable = true;
 
   plugins = with pkgs.vimPlugins; [
-    oil-nvim
     copilot-lua
     github-nvim-theme
     nvim-treesitter.withAllGrammars

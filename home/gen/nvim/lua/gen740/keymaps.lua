@@ -7,7 +7,7 @@ local global_keymap = {
     ['<m-l>'] = '<cmd>Copilot suggestion accept_line<cr>',
   },
   n = {
-    ['-'] = '<cmd>Oil<cr>',
+    ['-'] = '<cmd>Ex<cr>',
     ['<m-f>'] = function()
       vim.lsp.buf.format {
         async = false,
