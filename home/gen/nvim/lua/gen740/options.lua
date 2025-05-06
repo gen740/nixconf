@@ -15,6 +15,7 @@ vim.opt.cmdheight = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_hide = 1
 vim.g.netrw_list_hide = [[\(^\.\/\=$\)\|\(^\.\.\/\=$\)\|\(^\.DS_Store$\)]]
+vim.g.netrw_sort_sequence = [[^[^\.].*\/$,^\..*\/$,^[^\.][^\/]*$,^\.[^\/]*$]]
 
 vim.api.nvim_create_autocmd('TermOpen', {
   pattern = '*',
