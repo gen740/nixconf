@@ -14,10 +14,6 @@ end
 
 vim.lsp.enable { 'clangd', 'lua_ls', 'pyright', 'ruff', 'json', 'nixd', 'yamlls' }
 
-vim.lsp.config('*', {
-  on_attach = on_attach,
-})
-
 vim.lsp.config('clangd', {
   cmd = {
     'clangd',
@@ -57,6 +53,7 @@ do
 end
 
 vim.lsp.config('lua_ls', {
+  cmd = { 'lua-language-server' },
   settings = {
     Lua = {
       runtime = {
@@ -77,10 +74,12 @@ vim.lsp.config('lua_ls', {
       },
     },
   },
+  filetypes = { 'lua' },
   on_attach = on_attach,
 })
 
 vim.lsp.config('json', {
+  cmd = { 'vscode-json-languageserver', '--stdio' },
   settings = {
     json = {
       schemas = {
@@ -115,10 +114,12 @@ vim.lsp.config('json', {
       },
     },
   },
+  filetypes = { 'json', 'jsonc' },
   on_attach = on_attach,
 })
 
 vim.lsp.config('nixd', {
+  cmd = { 'nixd' },
   settings = {
     nixd = {
       nixpkgs = {
@@ -137,10 +138,12 @@ vim.lsp.config('nixd', {
       },
     },
   },
+  filetypes = { 'nix' },
   on_attach = on_attach,
 })
 
 vim.lsp.config('yamlls', {
+  cmd = { 'yaml-language-server', '--stdio' },
   settings = {
     yaml = {
       schemas = {
@@ -153,5 +156,6 @@ vim.lsp.config('yamlls', {
       },
     },
   },
+  filetypes = { 'yaml', 'yml' },
   on_attach = on_attach,
 })
