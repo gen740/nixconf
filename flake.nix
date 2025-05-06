@@ -17,7 +17,7 @@
     };
     secrets = {
       url = "path:/etc/secrets";
-    };
+   };
   };
 
   outputs =
