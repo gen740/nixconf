@@ -1,15 +1,13 @@
-vim.opt.clipboard = 'unnamed'
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.expandtab = true
 vim.opt.wrap = false
 vim.opt.signcolumn = 'yes'
 vim.opt.list = true
-vim.opt.listchars = { tab = '»─', trail = '␣', extends = '»', precedes = '«', nbsp = '%' }
+vim.opt.listchars = { tab = '»·', trail = '·', extends = '›', precedes = '‹' }
 vim.opt.pumheight = 15
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { 'fuzzy', 'menu', 'menuone', 'noselect' }
 vim.opt.cmdheight = 0
 
 vim.g.netrw_banner = 0
@@ -28,7 +26,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 
 vim.cmd('colorscheme github_dark_colorblind')
 vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = '#30363d', fg = '#0d1117' })
-vim.api.nvim_set_hl(0, 'Whitespace', { fg = '#30363d' })
+vim.api.nvim_set_hl(0, 'Whitespace', { fg = '#8b949e' })
 
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
