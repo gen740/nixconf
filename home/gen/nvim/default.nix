@@ -7,6 +7,7 @@
     oil-nvim
     copilot-lua
     github-nvim-theme
+    nvim-treesitter.withAllGrammars
   ];
 
   viAlias = true;

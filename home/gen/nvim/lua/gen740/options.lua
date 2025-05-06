@@ -23,3 +23,9 @@ vim.api.nvim_create_autocmd('TermOpen', {
 vim.cmd('colorscheme github_dark_colorblind')
 vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = '#30363d', fg = '#0d1117' })
 vim.api.nvim_set_hl(0, 'Whitespace', { fg = '#30363d' })
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
