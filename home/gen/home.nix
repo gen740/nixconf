@@ -19,11 +19,6 @@
 
         home.packages = with pkgs; [
           trash-cli
-          rsync
-          zstd
-          wget
-          stylua
-          cachix
         ];
 
         xdg.configFile = {

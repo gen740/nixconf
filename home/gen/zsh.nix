@@ -21,6 +21,9 @@
     if whence __git_ps1 &>/dev/null; then
       precmd () { __git_ps1 "$HM_OS_ICON (%m) %~ " "" "(%s) " }
     fi
+    n() {
+      nix run nixpkgs#$1 "${"$"}{@:2}"
+    }
   '';
   envExtra = ''
     unsetopt global_rcs
