@@ -103,4 +103,30 @@ for mode, keys in pairs(global_keymap) do
   end
 end
 
-require('gen740.lsps')
+require('copilot').setup {
+  suggestion = {
+    enabled = true,
+    auto_trigger = true,
+    debounce = 75,
+  },
+}
+
+local on_attach = function(client, bufnr)
+  local chars = {}
+  for i = 32, 126 do
+    table.insert(chars, string.char(i))
+  end
+  client.server_capabilities.completionProvider.triggerCharacters = chars
+  vim.lsp.completion.enable(true, client.id, bufnr, {
+    autotrigger = true,
+    convert = function(item)
+      return { abbr = item.label:gsub('%b()', '') }
+    end,
+  })
+end
+
+vim.lsp.enable { 'clangd', 'lua_ls', 'pyright', 'ruff', 'json', 'nixd', 'yamlls' }
+
+vim.lsp.config('*', {
+  on_attach = on_attach,
+})
