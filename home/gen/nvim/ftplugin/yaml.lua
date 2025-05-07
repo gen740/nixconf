@@ -1,5 +1,12 @@
 vim.lsp.config('yamlls', {
-  cmd = { 'yaml-language-server', '--stdio' },
+  cmd = {
+    'nix',
+    'shell',
+    'nixpkgs#vscode-langservers-extracted',
+    '-c',
+    'yaml-language-server',
+    '--stdio',
+  },
   settings = {
     yaml = {
       schemas = {

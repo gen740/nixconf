@@ -41,7 +41,7 @@ do
 end
 
 vim.lsp.config('lua_ls', {
-  cmd = { 'lua-language-server' },
+  cmd = { 'nix', 'run', 'nixpkgs#lua-language-server' },
   settings = {
     Lua = {
       runtime = {

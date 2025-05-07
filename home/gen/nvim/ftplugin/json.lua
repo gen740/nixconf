@@ -1,5 +1,12 @@
 vim.lsp.config('json', {
-  cmd = { 'vscode-json-languageserver', '--stdio' },
+  cmd = {
+    'nix',
+    'shell',
+    'nixpkgs#vscode-langservers-extracted',
+    '-c',
+    'vscode-json-language-server',
+    '--stdio',
+  },
   settings = {
     json = {
       schemas = {

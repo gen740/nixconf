@@ -19,23 +19,10 @@
 
         home.packages = with pkgs; [
           trash-cli
-          nixd
-          nixfmt-rfc-style
           rsync
           zstd
           wget
-
-          vscode-langservers-extracted
-          typescript-language-server
-          ruff
-          pyright
-          gopls
-          yaml-language-server
-          docker-language-server
-          lua-language-server
           stylua
-          biome
-          llvmPackages.clang-tools
           cachix
         ];
 
