@@ -20,3 +20,4 @@ vim.lsp.config('nixd', {
   },
   filetypes = { 'nix' },
 })
+vim.opt_local.iskeyword:append('-')

@@ -8,7 +8,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.list = true
 vim.opt.listchars = { tab = '»·', trail = '·', extends = '›', precedes = '‹' }
 vim.opt.pumheight = 15
-vim.opt.completeopt = { 'fuzzy', 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.cmdheight = 0
 
 vim.g.netrw_banner = 0
@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-local global_keymap = {
+for mode, keys in pairs {
   i = {
     ['<c-l>'] = '<cmd>Copilot suggestion next<cr>',
     ['<c-h>'] = '<cmd>Copilot suggestion prev<cr>',
@@ -91,9 +91,7 @@ local global_keymap = {
   t = {
     ['<esc><esc>'] = '<C-\\><C-n>',
   },
-}
-
-for mode, keys in pairs(global_keymap) do
+} do
   for key, callback in pairs(keys) do
     if type(callback) == 'table' then
       vim.keymap.set(mode, key, callback[1], callback[2])
@@ -111,22 +109,21 @@ require('copilot').setup {
   },
 }
 
-local on_attach = function(client, bufnr)
-  local chars = {}
-  for i = 32, 126 do
-    table.insert(chars, string.char(i))
-  end
-  client.server_capabilities.completionProvider.triggerCharacters = chars
-  vim.lsp.completion.enable(true, client.id, bufnr, {
-    autotrigger = true,
-    convert = function(item)
-      return { abbr = item.label:gsub('%b()', '') }
-    end,
-  })
-end
-
 vim.lsp.enable { 'clangd', 'lua_ls', 'pyright', 'ruff', 'json', 'nixd', 'yamlls' }
-
 vim.lsp.config('*', {
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    if client:supports_method('textDocument/completion') then
+      local chars = {}
+      for i = 32, 126 do
+        table.insert(chars, string.char(i))
+      end
+      client.server_capabilities.completionProvider.triggerCharacters = chars
+      vim.lsp.completion.enable(true, client.id, bufnr, {
+        autotrigger = true,
+        convert = function(item)
+          return { abbr = item.label:gsub('%b()', '') }
+        end,
+      })
+    end
+  end,
 })
