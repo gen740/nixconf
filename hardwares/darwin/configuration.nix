@@ -60,7 +60,7 @@ in
             <true/>
 
             <key>StartInterval</key>
-            <integer>60</integer>
+            <integer>1500</integer>
 
             <key>StandardOutPath</key>
             <string>/tmp/vpn-autoconnect.log</string>
