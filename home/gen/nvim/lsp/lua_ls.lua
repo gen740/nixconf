@@ -8,11 +8,15 @@ do
   local path = vim.opt.packpath:get()[1] .. '/pack/myNeovimPackages/start'
   local handle = vim.loop.fs_scandir(path)
   while handle do
-    local name, _ = vim.loop.fs_scandir_next(handle)
+    local name = vim.loop.fs_scandir_next(handle)
     if not name then
       break
     end
-    table.insert(libraries, path .. '/' .. name)
+    local lua_dir = path .. '/' .. name .. '/lua'
+    local stat = vim.loop.fs_stat(lua_dir)
+    if stat and stat.type == 'directory' then
+      table.insert(libraries, path .. '/' .. name)
+    end
   end
 end
 
