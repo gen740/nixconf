@@ -1,7 +1,7 @@
 vim.keymap.set('n', '<m-f>', function()
   vim.cmd('w')
   local handle = vim.system(
-    { 'stylua', vim.fn.expand('%:p') },
+    { 'nix', 'run', 'nixpkgs#stylua', vim.fn.expand('%:p') },
     {},
     vim.schedule_wrap(function()
       local current_line = vim.fn.line('.')
