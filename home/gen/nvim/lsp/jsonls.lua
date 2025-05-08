@@ -1,4 +1,4 @@
-vim.lsp.config('json', {
+return {
   cmd = {
     'nix',
     'shell',
@@ -42,4 +42,4 @@ vim.lsp.config('json', {
     },
   },
   filetypes = { 'json', 'jsonc' },
-})
+}

@@ -109,7 +109,6 @@ require('copilot').setup {
   },
 }
 
-vim.lsp.enable { 'clangd', 'lua_ls', 'pyright', 'ruff', 'json', 'nixd', 'yamlls' }
 vim.lsp.config('*', {
   on_attach = function(client, bufnr)
     if client:supports_method('textDocument/completion') then
@@ -127,3 +126,5 @@ vim.lsp.config('*', {
     end
   end,
 })
+
+vim.lsp.enable { 'nixd', 'lua_ls', 'jsonls', 'yamlls', 'clangd' }

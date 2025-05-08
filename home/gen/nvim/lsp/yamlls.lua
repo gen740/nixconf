@@ -1,4 +1,4 @@
-vim.lsp.config('yamlls', {
+return {
   cmd = {
     'nix',
     'shell',
@@ -20,4 +20,4 @@ vim.lsp.config('yamlls', {
     },
   },
   filetypes = { 'yaml', 'yml' },
-})
+}
