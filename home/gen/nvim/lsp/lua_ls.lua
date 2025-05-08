@@ -1,6 +1,7 @@
 local libraries = {
   '${3rd}/luv/library',
   '${3rd}/luassert/library',
+  vim.env.VIMRUNTIME,
 }
 
 do
@@ -15,15 +16,6 @@ do
   end
 end
 
-do
-  local runtimes = vim.opt.runtimepath:get()
-  for _, r in pairs(runtimes) do
-    if vim.endswith(r, 'share/nvim/runtime') then
-      table.insert(libraries, r)
-    end
-  end
-end
-
 return {
   cmd = { 'nix', 'run', 'nixpkgs#lua-language-server' },
   settings = {
@@ -31,17 +23,11 @@ return {
       runtime = {
         version = 'LuaJIT',
       },
-      diagnostics = {
-        globals = { 'vim' },
-      },
       workspace = {
         library = libraries,
         checkThirdParty = 'Disabled',
       },
       telemetry = {
-        enable = false,
-      },
-      format = {
         enable = false,
       },
     },
