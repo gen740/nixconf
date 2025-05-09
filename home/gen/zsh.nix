@@ -22,11 +22,16 @@
       precmd () {
       local EXIT_STATUS=$?
       if [ $EXIT_STATUS -ne 0 ]; then
-        echo "[$EXIT_STATUS]"
+         echo -e "\e[31m[${"$"}{EXIT_STATUS}]\e[0m"
       fi
-      __git_ps1 "
-    $HM_OS_ICON (%m) %~" "
-    > " " -  %s" }
+      if (( ZSH_PROMPT_HAS_RUN )); then
+        echo
+      else
+        ZSH_PROMPT_HAS_RUN=1
+      fi
+      __git_ps1 "$HM_OS_ICON (%m) %~" "
+    > " " - \e[32m %s\e[0m"
+    }
     fi
     n() {
       nix run nixpkgs#$1 "${"$"}{@:2}"
