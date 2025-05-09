@@ -2,10 +2,10 @@ return {
   cmd = {
     'nix',
     'shell',
-    'nixpkgs#pyright',
+    'nixpkgs#ruff',
     '-c',
-    'pyright-langserver',
-    '--stdio'
+    'ruff',
+    'server',
   },
   filetypes = { 'python' },
 }
