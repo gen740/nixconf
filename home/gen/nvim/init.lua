@@ -127,4 +127,4 @@ vim.lsp.config('*', {
   end,
 })
 
-vim.lsp.enable { 'nixd', 'lua_ls', 'jsonls', 'yamlls', 'clangd' }
+vim.lsp.enable { 'nixd', 'lua_ls', 'jsonls', 'yamlls', 'clangd', 'pyright' }
