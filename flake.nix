@@ -16,8 +16,8 @@
       url = "github:NixOS/nixos-hardware";
     };
     secrets = {
-      url = "path:/etc/secrets";
-   };
+      url = "path:/private/etc/secrets";
+    };
   };
 
   outputs =
