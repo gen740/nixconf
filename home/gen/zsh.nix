@@ -19,7 +19,14 @@
         ;;
     esac
     if whence __git_ps1 &>/dev/null; then
-      precmd () { __git_ps1 "$HM_OS_ICON (%m) %~ " "" "(%s) " }
+      precmd () {
+      local EXIT_STATUS=$?
+      if [ $EXIT_STATUS -ne 0 ]; then
+        echo "[$EXIT_STATUS]"
+      fi
+      __git_ps1 "
+    $HM_OS_ICON (%m) %~" "
+    > " " -  %s" }
     fi
     n() {
       nix run nixpkgs#$1 "${"$"}{@:2}"
@@ -69,7 +76,6 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
-    PROMPT = "%~ ";
   };
   enableCompletion = true;
 }
