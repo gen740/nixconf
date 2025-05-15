@@ -16,7 +16,7 @@
       url = "github:NixOS/nixos-hardware";
     };
     secrets = {
-      url = "path:/private/etc/secrets";
+      url = "path:/opt/secrets";
     };
   };
 
@@ -116,24 +116,24 @@
           apps =
             let
               createSecretsIfNotExistsScript = ''
-                  if [ ! -f /etc/secrets/flake.nix ]; then
-                    echo "I will create /etc/secrets/flake.nix [y/N]"
+                  if [ ! -f /opt/secrets/flake.nix ]; then
+                    echo "I will create /opt/secrets/flake.nix [y/N]"
                     read answer
                     case "$answer" in
                       [yY]|[yY][eE][sS])
-                        echo "Creating /etc/secrets/flake.nix from template..."
-                        sudo mkdir -p /etc/secrets
-                        sudo sh -c 'cat > /etc/secrets/flake.nix <<EOF
+                        echo "Creating /opt/secrets/flake.nix from template..."
+                        sudo mkdir -p /opt/secrets
+                        sudo sh -c 'cat > /opt/secrets/flake.nix <<EOF
                 ${builtins.readFile ./secrets_template.nix}
                 EOF'
-                        sudo chmod 644 /etc/secrets/flake.nix
+                        sudo chmod 644 /opt/secrets/flake.nix
                         ;;
                       *)
-                        echo "Skipped creation of /etc/secrets/flake.nix"
+                        echo "Skipped creation of /opt/secrets/flake.nix"
                         ;;
                     esac
                   else
-                    echo "/etc/secrets/flake.nix already exists"
+                    echo "/opt/secrets/flake.nix already exists"
                   fi
               '';
             in
@@ -162,7 +162,6 @@
                 type = "app";
                 program =
                   (pkgs.writeShellScriptBin "switch-darwin-configuration" ''
-
                     ${createSecretsIfNotExistsScript}
                     exec ${
                       inputs.nix-darwin.packages.${system}.darwin-rebuild

@@ -116,13 +116,13 @@
     },
     "secrets": {
       "locked": {
-        "lastModified": 1746472415,
+        "lastModified": 1747273403,
         "narHash": "sha256-I/oqbGro8yEUy+62L3Iz2kxFB2T7OoZXKMLUH4zWQVM=",
-        "path": "/private/etc/secrets",
+        "path": "/opt/secrets",
         "type": "path"
       },
       "original": {
-        "path": "/private/etc/secrets",
+        "path": "/opt/secrets",
         "type": "path"
       }
     }
