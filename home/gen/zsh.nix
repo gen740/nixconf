@@ -33,9 +33,6 @@
     > " " - \e[32m %s\e[0m"
     }
     fi
-    n() {
-      nix run nixpkgs#$1 "${"$"}{@:2}"
-    }
   '';
   envExtra = ''
     unsetopt global_rcs

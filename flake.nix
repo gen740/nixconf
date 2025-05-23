@@ -163,7 +163,7 @@
                 program =
                   (pkgs.writeShellScriptBin "switch-darwin-configuration" ''
                     ${createSecretsIfNotExistsScript}
-                    exec ${
+                    exec sudo ${
                       inputs.nix-darwin.packages.${system}.darwin-rebuild
                     }/bin/darwin-rebuild switch -v -L --show-trace --flake ${self.outPath}#gen740
                   '').outPath

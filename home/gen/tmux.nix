@@ -8,7 +8,7 @@
   extraConfig = ''
     set-option -g status-justify "centre"
     set-option -g status-style bg=default
-    set -g status-left "[#S]"
+    set -g status-left "[#S]          "
     set -g window-status-format         "#I:#W "
     set -g window-status-current-format "#[bold]#I:#W*"
     set -g status-right "#[bold]%H:%M %m-%d"
