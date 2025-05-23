@@ -61,6 +61,7 @@ for mode, keys in pairs {
         end,
       }
     end,
+    ['<space>bt'] = "<cmd>belowright 15split | terminal<cr>",
 
     --- LSP
     ['<space>e'] = vim.diagnostic.open_float,
