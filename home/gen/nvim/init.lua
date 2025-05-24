@@ -7,7 +7,7 @@ vim.opt.wrap = false
 vim.opt.signcolumn = 'yes'
 vim.opt.list = true
 vim.opt.listchars = { tab = '»·', trail = '·', extends = '›', precedes = '‹' }
-vim.opt.pumheight = 15
+vim.opt.pumheight = 20
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.cmdheight = 0
 
