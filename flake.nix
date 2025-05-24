@@ -174,7 +174,7 @@
                 type = "app";
                 program =
                   (pkgs.writeShellScriptBin "gen740-switch-configuration" ''
-                    git add -A
+                    git add -A -p
                     git commit -m "Update configuration"
                     git push
                   '').outPath

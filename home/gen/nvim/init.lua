@@ -7,7 +7,7 @@ vim.opt.wrap = false
 vim.opt.signcolumn = 'yes'
 vim.opt.list = true
 vim.opt.listchars = { tab = '»·', trail = '·', extends = '›', precedes = '‹' }
-vim.opt.pumheight = 20
+vim.opt.pumheight = 15
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.cmdheight = 0
 
@@ -61,7 +61,7 @@ for mode, keys in pairs {
         end,
       }
     end,
-    ['<space>bt'] = "<cmd>belowright 15split | terminal<cr>",
+    ['<space>bt'] = "<cmd>belowright 20split | terminal<cr>",
 
     --- LSP
     ['<space>e'] = vim.diagnostic.open_float,
