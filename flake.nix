@@ -177,7 +177,6 @@
                     git add -A
                     git commit -m "Update configuration"
                     git push
-                    switch-conf
                   '').outPath
                   + "/bin/gen740-switch-configuration";
               };
