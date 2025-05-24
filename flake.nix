@@ -138,18 +138,6 @@
               '';
             in
             {
-              default = {
-                type = "app";
-                program =
-                  (pkgs.writeShellScriptBin "gen740-switch-configuration" ''
-                    git add -A
-                    git commit -m "Update configuration"
-                    git push
-                    switch-conf
-                  '').outPath
-                  + "/bin/gen740-switch-configuration";
-              };
-
               switchOrbstackConfiguration = {
                 type = "app";
                 program =
@@ -181,6 +169,19 @@
                   '').outPath
                   + "/bin/switch-darwin-configuration";
               };
+
+              default = {
+                type = "app";
+                program =
+                  (pkgs.writeShellScriptBin "gen740-switch-configuration" ''
+                    git add -A
+                    git commit -m "Update configuration"
+                    git push
+                    switch-conf
+                  '').outPath
+                  + "/bin/gen740-switch-configuration";
+              };
+
             };
         };
     };
